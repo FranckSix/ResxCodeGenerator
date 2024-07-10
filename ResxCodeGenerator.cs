@@ -1,6 +1,9 @@
-﻿using Microsoft.CodeAnalysis;
+﻿using System;
+using System.IO;
+using Microsoft.CodeAnalysis;
 using System.Text;
 using System.Xml.Linq;
+using System.Linq;
 
 namespace ResxCodeGenerator;
 

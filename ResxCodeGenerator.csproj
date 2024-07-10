@@ -1,38 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-   <PropertyGroup Label="Globals">
+   <PropertyGroup>
       <OutputItemType>Analyzer</OutputItemType>
-      <OutputType>Library</OutputType>
-      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-      <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
       <TargetFramework>net8.0</TargetFramework>
-      <ImplicitUsings>enable</ImplicitUsings>
-      <Nullable>enable</Nullable>
-      <IsRoslynComponent>true</IsRoslynComponent>
-      <Version>1.3.1</Version>
-      <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
-      <IncludeSymbols>false</IncludeSymbols>
-      <IncludeBuildOutput>false</IncludeBuildOutput>
       <LangVersion>latest</LangVersion>
+
+      <!-- Avoid ID conflicts with the package project. -->
+      <Nullable>enable</Nullable>
+      <AssemblyVersion>1.3.4</AssemblyVersion>
+      <FileVersion>$(AssemblyVersion)</FileVersion>
+      <Version>$(AssemblyVersion)</Version>
+      <Title>$(AssemblyName)</Title>
+      <IsAnalyzer>true</IsAnalyzer>
+   </PropertyGroup>
+
+   <PropertyGroup>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+      <Version>$(AssemblyVersion)</Version>
+      <Authors>FranckSix</Authors>
+      <Description>Generate Interface and class to consume Resx file via IStringLocalizer</Description>
       <PackageLicenseExpression>MIT</PackageLicenseExpression>
-      <PackageReadmeFile>README.md</PackageReadmeFile>
-      <NoWarn>$(NoWarn);NU5128</NoWarn>
+      <PackageReadmeFile>docs/README.md</PackageReadmeFile>
+      <RepositoryUrl>https://github.com/FranckSix/ResxCodeGenerator</RepositoryUrl>
    </PropertyGroup>
 
    <ItemGroup>
-      <None Include="build\**">
-         <Pack>true</Pack>
-         <PackagePath>build\</PackagePath>
-      </None>
-      <None Include="docs/README.md" Pack="true" PackagePath="\" />
+      <Content Include="docs\README.md" Pack="true" PackagePath="docs/" />
    </ItemGroup>
 
    <ItemGroup>
-      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.10.0" />
-      <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.4" />
-      <PackageReference Include="System.Runtime" Version="8.0.0" />
+      <PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.9.0" PrivateAssets="all" />
+      <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" Version="3.3.2" PrivateAssets="all" />
    </ItemGroup>
-
-   <Import Project="$(MSBuildProjectName).targets" />
 
 </Project>
