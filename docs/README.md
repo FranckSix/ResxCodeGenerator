@@ -5,9 +5,9 @@ Generates strongly typed wrapper classes. Include contants for each string resou
 
 The generated classes are named with the same name as their associated resx. These classes can then be used as follows:
 
-file : LocalizedResource.en.resx
+file : MyResource.en.resx
 ```html
-    @inject ILocalizedResource Localizer
+    @inject IMyResourceLocalizer Localizer
     <span>@Localizer.Hello</span>
 ```
 As the designated solution for localization is to use [IStringLocalizer](https://docs.microsoft.com/dotnet/api/microsoft.extensions.localization.istringlocalizer-1).

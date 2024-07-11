@@ -1,26 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Linq;
 
 namespace ResxCodeGenerator;
 
-internal class ResxClassGenerator(string baseName, IEnumerable<XElement> nodes)
+internal class ResxClassGenerator(ResxCodeMetadata metadata)
 {
+   public const string ClassTemplate = @"public class {0}(IStringLocalizer<{0}> stringLocalizer) : I{0}Localizer
+{{
+{1}
+}}";
+
+   public const string ParameterTemplate = "\tpublic string {0} => stringLocalizer[\"{0}\"]?.ToString() ?? \"{1}\";";
+
    public string Generate()
    {
-      var builder = new StringBuilder();
+      var sources = metadata
+         .Resources
+         .Select(n => string.Format(ParameterTemplate, n.Name, n.Value));
 
-      builder.AppendLine($"public class {baseName} : I{baseName}");
-      builder.AppendLine("{");
-      builder.AppendLine($"\tprivate readonly IStringLocalizer<{baseName}> _stringLocalizer;");
-      nodes.ToList().ForEach(n =>
-      {
-         var name = n.Attribute("name");
-         builder.AppendLine($"\tpublic string {name} => _stringLocalizer[\"{name}\"]?.ToString() ?? \"{n.Value}\";");
-      });
-      builder.AppendLine("}");
-
-      return builder.ToString();
+      return string.Format(ClassTemplate, metadata.FileName, string.Join("\n", sources));
    }
 }

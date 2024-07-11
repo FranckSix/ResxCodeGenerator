@@ -4,22 +4,27 @@ using Microsoft.CodeAnalysis;
 using System.Text;
 using System.Xml.Linq;
 using System.Linq;
+using Microsoft.CodeAnalysis.Text;
 
 namespace ResxCodeGenerator;
 
 [Generator]
 public class ResxCodeGenerator : ISourceGenerator
 {
+   public static string FileTemplate = @"// GENERATED CLASS
+using Microsoft.Extensions.Localization;
+using System.Text;
+
+namespace {0};
+{1}
+{2}";
+
    public void Initialize(GeneratorInitializationContext context)
    {
    }
 
    public void Execute(GeneratorExecutionContext context)
    {
-      var sourceBuilder = new StringBuilder();
-
-      sourceBuilder.AppendLine($"namespace {context.Compilation.AssemblyName}.Resources;\n");
-
       try
       {
          // Find all .resx files in the project
@@ -31,13 +36,16 @@ public class ResxCodeGenerator : ISourceGenerator
             if (text == null) return;
 
             var baseName = Path.GetFileNameWithoutExtension(r.Path).Split('.').First();
-            var document = XDocument.Parse(text.ToString());
+            var metadata = new ResxCodeMetadata(baseName, context.Compilation.AssemblyName, XDocument.Parse(text.ToString()).Descendants("data"));
 
-            var descendants = document.Descendants("data");
+            var source = string.Format(
+               FileTemplate,
+               metadata.Namespace,
+               new ResxInterfaceGenerator(metadata).Generate(),
+               new ResxClassGenerator(metadata).Generate());
 
-            sourceBuilder.Append(new ResxInterfaceGenerator(baseName, descendants).Generate());
-            sourceBuilder.Append(new ResxClassGenerator(baseName, descendants).Generate());
-
+            if (!context.CancellationToken.IsCancellationRequested)
+               context.AddSource(baseName + "Localisation", SourceText.From(source, Encoding.UTF8));
          });
       }
       catch (Exception ex)

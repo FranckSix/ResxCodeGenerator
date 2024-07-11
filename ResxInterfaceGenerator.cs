@@ -1,22 +1,22 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Xml.Linq;
+﻿using System.Linq;
 
-namespace ResxCodeGenerator
+namespace ResxCodeGenerator;
+
+internal class ResxInterfaceGenerator (ResxCodeMetadata metadata)
 {
-   internal class ResxInterfaceGenerator (string baseName, IEnumerable<XElement> nodes)
+   public const string InterfaceTemplate = @"public interface I{0}Localizer
+{{
+{1}
+}}";
+
+   public const string ParameterTemplate = "\tstring {0} {{ get; }}";
+
+   public string Generate()
    {
-      public string Generate()
-      {
-         var builder = new StringBuilder();
+      var sources = metadata
+         .Resources
+         .Select(n => string.Format(ParameterTemplate, n.Name));
 
-         builder.AppendLine($"public interface I{baseName}");
-         builder.AppendLine("{");
-         nodes.ToList().ForEach(n => builder.AppendLine($"\tstring {n.Attribute("name")} {{ get; }}"));
-         builder.AppendLine("}\n");
-
-         return builder.ToString();
-      }
+      return string.Format(InterfaceTemplate, metadata.FileName, string.Join("\n", sources));
    }
 }
