@@ -6,8 +6,8 @@ namespace ResxCodeGenerator;
 
 internal class ResxCodeMetadata(string fileName, string @namespace, IEnumerable<XElement> resources)
 {
-   public string FileName { get; } = fileName;
-
+   public string Name { get; } = fileName;
+   public string InterfaceName => $"ILocalized{Name}Resources";
    public string Namespace { get; } = $"{@namespace}.Resources";
    public IEnumerable<ResourceDefinition> Resources { get; } = resources.Select(r => new ResourceDefinition
    {

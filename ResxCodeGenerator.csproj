@@ -13,7 +13,7 @@
    <PropertyGroup>
       <PackageId>ResxCodeGenerator</PackageId>
       <Product>ResxCodeGenerator</Product>
-      <Version>1.4.0</Version>
+      <Version>1.4.5</Version>
       <PackageVersion>$(Version)</PackageVersion>
       <Authors>FranckSix</Authors>
       <PackageProjectUrl>https://github.com/FranckSix/ResxCodeGenerator</PackageProjectUrl>

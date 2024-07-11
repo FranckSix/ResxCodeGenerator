@@ -4,7 +4,7 @@ namespace ResxCodeGenerator;
 
 internal class ResxInterfaceGenerator (ResxCodeMetadata metadata)
 {
-   public const string InterfaceTemplate = @"public interface I{0}Localizer
+   public const string InterfaceTemplate = @"public interface {0}
 {{
 {1}
 }}";
@@ -17,6 +17,6 @@ internal class ResxInterfaceGenerator (ResxCodeMetadata metadata)
          .Resources
          .Select(n => string.Format(ParameterTemplate, n.Name));
 
-      return string.Format(InterfaceTemplate, metadata.FileName, string.Join("\n", sources));
+      return string.Format(InterfaceTemplate, metadata.InterfaceName, string.Join("\n", sources));
    }
 }
