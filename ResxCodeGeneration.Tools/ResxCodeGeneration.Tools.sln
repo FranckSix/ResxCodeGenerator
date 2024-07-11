@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35027.167
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ResxCodeGeneration.Tools", "ResxCodeGeneration.Tools.csproj", "{896ABB17-F0E7-4DC5-9865-649CAB2055E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{896ABB17-F0E7-4DC5-9865-649CAB2055E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{896ABB17-F0E7-4DC5-9865-649CAB2055E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{896ABB17-F0E7-4DC5-9865-649CAB2055E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{896ABB17-F0E7-4DC5-9865-649CAB2055E4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1699DBF0-84E0-4CA4-9E38-71069454E85A}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,53 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+   <PropertyGroup>
+      <TargetFramework>net8.0</TargetFramework>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <Nullable>enable</Nullable>
+      <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+      <IncludeBuildOutput>false</IncludeBuildOutput>
+   </PropertyGroup>
+
+   <PropertyGroup>
+      <PackageId>ResxCodeGenerator</PackageId>
+      <Product>ResxCodeGenerator</Product>
+      <Version>1.4.6</Version>
+      <PackageVersion>$(Version)</PackageVersion>
+      <Authors>FranckSix</Authors>
+      <PackageProjectUrl>https://github.com/FranckSix/ResxCodeGenerator</PackageProjectUrl>
+      <RepositoryUrl>https://github.com/FranckSix/ResxCodeGenerator</RepositoryUrl>
+      <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+      <Description>A code generator for .resx files</Description>
+      <PackageReadmeFile>docs/README.md</PackageReadmeFile>
+      <PackageTags>ResxCodeGenerator, analyzers, source generator, net8, blazor, IStringLocalizer, resx, asp.net</PackageTags>
+      <NoPackageAnalysis>true</NoPackageAnalysis>
+      <PackageReleaseNotes>Initial release</PackageReleaseNotes>
+      <PackageLicenseExpression>MIT</PackageLicenseExpression>
+   </PropertyGroup>
+
+   <ItemGroup>
+      <None Include="$(OutputPath)\ResxCodeGenerator.dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+      <None Include="$(OutputPath)\ResxCodeGenerator.Tools.dll" Pack="true" PackagePath="lib" Visible="false" />
+      <None Update="**.ps1" CopyToOutputDirectory="Always" Pack="true" PackagePath="tools" />
+      <Content Include="$(OutputPath)\docs\README.md" Pack="true" PackagePath="docs/" />
+   </ItemGroup>
+
+   <ItemGroup>
+      <ProjectReference Include="..\..\ResxCodeGeneration.Tools\ResxCodeGenerator.Tools.csproj" />
+      <ProjectReference Include="..\..\ResxCodeGenerator\ResxCodeGenerator.csproj" />
+   </ItemGroup>
+
+   <ItemGroup>
+      <None Update="install.ps1">
+         <PackagePath>tools</PackagePath>
+         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+         <Pack>true</Pack>
+      </None>
+      <None Update="uninstall.ps1">
+         <PackagePath>tools</PackagePath>
+         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+         <Pack>true</Pack>
+      </None>
+   </ItemGroup>
+
+</Project>
